@@ -1,5 +1,5 @@
 # WNUtils
-useful C++ functions (zero dependencies)
+useful C++ utils functions with no dependencies.
 
 ## compile
 ```
