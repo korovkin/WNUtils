@@ -77,5 +77,20 @@ void split(std::string s,
     }
 }
 
+template <class V>
+std::string join(const std::vector<V>& values, const char* sep)
+{
+    if (values.size() == 0) {
+        return "";
+    }
+    std::string s = std::to_string(values[0]);
+    const size_t N = values.size();
+    for (size_t i = 1; i < N; ++i) {
+        s += sep;
+        s += std::to_string(values[i]);
+    }
+    return s;
+}
+
 
 };

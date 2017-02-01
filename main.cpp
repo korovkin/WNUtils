@@ -90,6 +90,15 @@ int main(int argc, char** argv)
         wn::split("1,2", ",", vInts);
         CHECK_EQ(vInts[0].myData, 1);
         CHECK_EQ(vInts[1].myData, 2);
+
+
+    }
+
+    // join:
+    {
+        std::vector<int> vInts = {1,2};
+        CHECK_EQ(wn::join(vInts, ","), "1,2");
+        CHECK_EQ(wn::join(vInts, ", "), "1, 2");
     }
     
     LOG(INFO) << "it works!";
