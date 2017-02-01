@@ -5,6 +5,7 @@
 
 #include <map>
 #include <set>
+#include <sstream>
 
 namespace wn {
 
@@ -79,7 +80,7 @@ void split(std::string s,
 
 /**
      join a container of element into a string.
-     join([1,2,3], ", "); => "1, 2, 3"
+     join({1:1,2:2,3:3], ","); => "(1,1),(2,2),(3,3)"
 */
 template <class V>
 std::string join(const std::vector<V>& values, const char* sep)
@@ -87,14 +88,60 @@ std::string join(const std::vector<V>& values, const char* sep)
     if (values.size() == 0) {
         return "";
     }
-    std::string s = std::to_string(values[0]);
+    std::stringstream ss;
+    ss << values[0];
+
     const size_t N = values.size();
     for (size_t i = 1; i < N; ++i) {
-        s += sep;
-        s += std::to_string(values[i]);
+        ss << sep;
+        ss << values[i];
     }
-    return s; // std::move
+    return ss.str();
 }
 
+template <class V>
+std::string join(const std::set<V>& values, const char* sep)
+{
+    if (values.size() == 0) {
+        return "";
+    }
+    std::stringstream ss;
+    ss << values[0];
+
+    const size_t N = values.size();
+    for (size_t i = 1; i < N; ++i) {
+        ss << sep;
+        ss << values[i];
+    }
+    return ss.str();
+}
+
+template <class K, class V>
+std::string join(const std::map<K, V>& values, const char* sep)
+{
+    if (values.size() == 0) {
+        return "";
+    }
+    auto iter = values.begin();
+    std::stringstream ss;
+
+    ss << "(";
+    ss << iter->first;
+    ss << sep;
+    ss << iter->second;
+    ss << ")";
+    iter++;
+    
+    for (; iter != values.end(); iter++) {
+        ss << sep;
+
+        ss << "(";
+        ss << iter->first;
+        ss << sep;
+        ss << iter->second;
+        ss << ")";
+    }
+    return ss.str();
+}
 
 };

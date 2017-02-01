@@ -90,8 +90,6 @@ int main(int argc, char** argv)
         wn::split("1,2", ",", vInts);
         CHECK_EQ(vInts[0].myData, 1);
         CHECK_EQ(vInts[1].myData, 2);
-
-
     }
 
     // join:
@@ -99,6 +97,18 @@ int main(int argc, char** argv)
         std::vector<int> vInts = {1,2};
         CHECK_EQ(wn::join(vInts, ","), "1,2");
         CHECK_EQ(wn::join(vInts, ", "), "1, 2");
+
+        std::map<int, int> mInts = {
+            {1, 1},
+            {2, 2},
+        };
+        CHECK_EQ(wn::join(mInts, ","), std::string("(1,1),(2,2)"));
+
+        std::map<std::string, std::string> mStrings = {
+            {"x", "xx"},
+            {"y", "yy"},
+        };
+        CHECK_EQ(wn::join(mStrings, ","), std::string("(x,xx),(y,yy)"));
     }
     
     LOG(INFO) << "it works!";
