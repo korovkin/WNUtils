@@ -27,3 +27,6 @@
 *.exe
 *.out
 *.app
+
+_build
+_build_xcode
