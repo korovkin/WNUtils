@@ -77,6 +77,10 @@ void split(std::string s,
     }
 }
 
+/**
+     join a container of element into a string.
+     join([1,2,3], ", "); => "1, 2, 3"
+*/
 template <class V>
 std::string join(const std::vector<V>& values, const char* sep)
 {
@@ -89,7 +93,7 @@ std::string join(const std::vector<V>& values, const char* sep)
         s += sep;
         s += std::to_string(values[i]);
     }
-    return s;
+    return s; // std::move
 }
 
 
