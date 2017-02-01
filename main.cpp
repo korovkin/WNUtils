@@ -66,6 +66,13 @@ int main(int argc, char** argv)
         CHECK(wn::contains(s, std::string("one")));
         CHECK_EQ(wn::contains(s, std::string("three")), false);
     }
+
+    // split
+    {
+        wn::split_with_callback("1,2,,3", ",", [](size_t i, const char* token){
+            LOG(INFO) << " i: " << i << " token: '" << token << "'";
+        });
+    }
     
     LOG(INFO) << "it works!";
 

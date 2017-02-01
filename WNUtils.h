@@ -45,4 +45,20 @@ bool contains(const std::set<K>& s, const K& key) {
     return s.find(key) != s.end();
 }
 
+/** 
+    split a given string by a given seperator
+    split("1,2,,3", ",", v); => v = ["1","2","","3"] 
+ */
+void split_with_callback(std::string s,
+           const char* sep,
+           const std::function<void(size_t i, const char* token)>& callback)
+{
+    char* strData = (char*)s.data();
+    size_t i = 0;
+    while (const char* token = strsep(&strData, sep)) {
+        callback(i++, token);
+    }
+}
+
+
 };
