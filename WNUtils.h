@@ -47,7 +47,8 @@ bool contains(const std::set<K>& s, const K& key) {
 
 /** 
     split a given string by a given seperator
-    split("1,2,,3", ",", v); => v = ["1","2","","3"] 
+    split("1,2,,3", ",", v); => v = ["1","2","","3"]
+    IMPORTANT: s is copied on purpose!
  */
 void split_with_callback(std::string s,
            const char* sep,
@@ -57,6 +58,22 @@ void split_with_callback(std::string s,
     size_t i = 0;
     while (const char* token = strsep(&strData, sep)) {
         callback(i++, token);
+    }
+}
+
+/**
+     split a given string by a given seperator
+     split("1,2,,3", ",", v); => v = ["1","2","","3"]
+     IMPORTANT: s is copied on purpose!
+ */
+template <class V>
+void split(std::string s,
+           const char* sep,
+           std::vector<V>& values)
+{
+    char* strData = (char*)s.data();
+    while (const char* token = strsep(&strData, sep)) {
+        values.push_back(token);
     }
 }
 

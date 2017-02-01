@@ -2,6 +2,12 @@
 
 #include "WNUtils.h"
 
+struct MyData {
+    int myData;
+    MyData(const char* d): myData(atoi(d))
+        {}
+};
+
 int main(int argc, char** argv)
 {
     google::InitGoogleLogging("wnutils");
@@ -69,9 +75,21 @@ int main(int argc, char** argv)
 
     // split
     {
-        wn::split_with_callback("1,2,,3", ",", [](size_t i, const char* token){
-            LOG(INFO) << " i: " << i << " token: '" << token << "'";
+        wn::split_with_callback("1,2,3,4", ",", [](size_t i, const char* token){
+            CHECK_EQ(std::to_string(i+1), std::string(token));
         });
+
+        std::vector<std::string> vStrings;
+        wn::split("1,2,,3", ",", vStrings);
+        CHECK_EQ(vStrings[0], "1");
+        CHECK_EQ(vStrings[1], "2");
+        CHECK_EQ(vStrings[2], "");
+        CHECK_EQ(vStrings[3], "3");
+
+        std::vector<MyData> vInts;
+        wn::split("1,2", ",", vInts);
+        CHECK_EQ(vInts[0].myData, 1);
+        CHECK_EQ(vInts[1].myData, 2);
     }
     
     LOG(INFO) << "it works!";
