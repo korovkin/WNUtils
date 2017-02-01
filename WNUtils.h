@@ -9,15 +9,15 @@
 
 namespace wn {
 
-/** 
+/**
     check if a given key is contained in the given map
  */
 template <class K, class V>
 bool contains_key(const std::map<K, V>& m, const K& key) {
     return m.find(key) != m.end();
 }
-    
-/** if key contained in map, 
+
+/** if key contained in map,
       set value=m[key] and return true
     else:
       set value=defaultValue and return false
@@ -33,7 +33,7 @@ bool get_key(const std::map<K, V>& m,
         value = defaultValue;
         return false;
     }
-    
+
     value = iter->second;
     return true;
 }
@@ -46,7 +46,7 @@ bool contains(const std::set<K>& s, const K& key) {
     return s.find(key) != s.end();
 }
 
-/** 
+/**
     split a given string by a given seperator
     split("1,2,,3", ",", v); => v = ["1","2","","3"]
     IMPORTANT: s is copied on purpose!
@@ -131,7 +131,7 @@ std::string join(const std::map<K, V>& values, const char* sep)
     ss << iter->second;
     ss << ")";
     iter++;
-    
+
     for (; iter != values.end(); iter++) {
         ss << sep;
 

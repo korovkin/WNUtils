@@ -16,29 +16,29 @@ int main(int argc, char** argv)
     FLAGS_logtostderr = true;
 
     LOG(INFO) << "hello!";
-    
+
     // map:
     {
         std::map<int, std::string> m{
             {1, "one"},
             {2, "two"}
         };
-        
+
         CHECK(wn::contains_key(m, 1));
         CHECK(wn::contains_key(m, 2));
         CHECK_EQ(wn::contains_key(m, 3), false);
-        
+
         std::string v;
         bool found = false;
 
         found = wn::get_key(m, 1, v, std::string("x"));
         CHECK(found);
         CHECK_EQ(v, "one");
-        
+
         found = wn::get_key(m, 2, v, std::string("x"));
         CHECK(found);
         CHECK_EQ(v, "two");
-        
+
         found = wn::get_key(m, 7, v, std::string("seven"));
         CHECK(!found);
         CHECK_EQ(v, "seven");
@@ -110,7 +110,7 @@ int main(int argc, char** argv)
         };
         CHECK_EQ(wn::join(mStrings, ","), std::string("(x,xx),(y,yy)"));
     }
-    
+
     LOG(INFO) << "it works!";
 
     return EXIT_SUCCESS;
